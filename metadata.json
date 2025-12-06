@@ -1,0 +1,5 @@
+{
+  "name": "AtomicFlow",
+  "description": "A minimalist habit tracker based on Atomic Habits principles, featuring an AI life coach to help you build systems and identity-based habits.",
+  "requestFramePermissions": []
+}
