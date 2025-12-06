@@ -5,7 +5,7 @@ import { auth, signInWithGoogle, logout } from '../services/firebase';
 interface AuthContextType {
     user: User | null;
     loading: boolean;
-    signIn: () => Promise<void>;
+    signInWithGoogle: () => Promise<void>;
     signOut: () => Promise<void>;
 }
 
@@ -24,7 +24,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         return unsubscribe;
     }, []);
 
-    const signIn = async () => {
+    const handleSignInWithGoogle = async () => {
         await signInWithGoogle();
     };
 
@@ -33,7 +33,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     };
 
     return (
-        <AuthContext.Provider value={{ user, loading, signIn, signOut }}>
+        <AuthContext.Provider value={{ user, loading, signInWithGoogle: handleSignInWithGoogle, signOut }}>
             {!loading && children}
         </AuthContext.Provider>
     );

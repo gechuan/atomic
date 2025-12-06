@@ -10,9 +10,10 @@ import { ConfirmationModal } from './components/ConfirmationModal';
 import { AuthProvider, useAuth } from './contexts/AuthContext';
 import { db } from './services/firebase';
 import { collection, query, where, onSnapshot, addDoc, updateDoc, deleteDoc, doc, setDoc } from 'firebase/firestore';
+import { LoginView } from './components/LoginView';
 
 function AuthenticatedApp() {
-  const { user, signIn, signOut } = useAuth();
+  const { user, signOut } = useAuth();
   const [activeTab, setActiveTab] = useState<Tab>(Tab.TODAY);
   const [habits, setHabits] = useState<Habit[]>([]);
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
@@ -119,21 +120,15 @@ function AuthenticatedApp() {
   if (!user) {
     return (
       <div className="min-h-screen bg-black text-white flex flex-col items-center justify-center p-6">
-        <div className="max-w-md w-full text-center space-y-8">
-          <div>
+        <div className="max-w-md w-full flex flex-col items-center space-y-12">
+          <div className="text-center">
             <h1 className="text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-zinc-500 mb-2">
               我的口袋
             </h1>
             <p className="text-zinc-400">日积跬步，养成好习惯。</p>
           </div>
 
-          <button
-            onClick={signIn}
-            className="w-full bg-white text-black font-bold py-4 px-6 rounded-2xl flex items-center justify-center gap-3 hover:scale-105 transition-transform active:scale-95"
-          >
-            <LogIn size={20} />
-            使用 Google 登录
-          </button>
+          <LoginView />
         </div>
       </div>
     );
